@@ -1,0 +1,22 @@
+{
+  "name": "petadopt-be",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.18.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.3.0",
+    "graphql-server-express": "^1.4.1",
+    "graphql-tools": "^6.2.4",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0"
+  }
+}
