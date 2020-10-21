@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook");
-const { makeExecutableSchema } = require("graphql-tools");
 
 const { ApolloServer } = require("apollo-server-express");
 
@@ -67,32 +66,29 @@ app.get(
   },
 );
 
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+//   context: ({ req }) => {
+//     // get the user token from the headers
+//     const token = req.headers.authorization || "";
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req }) => {
-    // get the user token from the headers
-    const token = req.headers.authorization || "";
+//     // try to retrieve a user with the token
+//     // for test
+//     const user = {
+//       username: "fabricio",
+//     };
 
-    // try to retrieve a user with the token
-    // for test
-    const user = {
-      username: "fabricio",
-    };
+//     // const user = getUser(token);
 
-    // const user = getUser(token);
+//     // add the user to the context
+//     return { user };
+//   },
+// });
 
-    // add the user to the context
-    return { user };
-  },
-});
+const apolloServer = require("./graphql");
 
-server.applyMiddleware({ app });
+apolloServer.applyMiddleware({ app });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

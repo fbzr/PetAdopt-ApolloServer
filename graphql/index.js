@@ -1,3 +1,25 @@
-// const server = (app) => {};
+const { ApolloServer } = require("apollo-server-express");
+const typeDefs = require("./schema");
+const resolvers = require("./resolvers");
 
-// export default server;
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => {
+    // get the user token from the headers
+    const token = req.headers.authorization || "";
+
+    // try to retrieve a user with the token
+    // for test
+    const user = {
+      username: "fabricio",
+    };
+
+    // const user = getUser(token);
+
+    // add the user to the context
+    return { user };
+  },
+});
+
+module.exports = apolloServer;
