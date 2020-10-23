@@ -22,6 +22,11 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
   },
+  likes: {
+    type: [String], // array of animals' IDs
+    required: true,
+    default: [],
+  },
 });
 
 module.exports = User = model("user", UserSchema);
