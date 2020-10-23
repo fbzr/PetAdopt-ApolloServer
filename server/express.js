@@ -25,6 +25,7 @@ app.use(passport.session());
 app.get("/", (req, res) => {
   console.log("***REQ SESSION***", req.session);
   if (req.isAuthenticated()) {
+    console.log("***REQ USER***", req.user);
     return res.send("AUTHENTICATED");
   }
 
