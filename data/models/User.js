@@ -13,7 +13,7 @@ const UserSchema = new Schema({
     index: true,
     unique: true,
   },
-  displayName: {
+  name: {
     type: String,
     required: false,
   },

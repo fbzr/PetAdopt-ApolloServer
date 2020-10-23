@@ -1,52 +1,42 @@
 const passport = require("passport");
-const FacebookStrategy = require("passport-facebook");
 const UserController = require("../data/controllers/User");
+const facebook = require("./strategies/facebook");
 
-/* The user id (you provide as the second argument of the done function) is saved in the session and is later used to retrieve the whole object via the deserializeUser function. */
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
+module.exports = (app) => {
+  // Init passport authentication
+  app.use(passport.initialize());
+  // Persistent login sessions
+  app.use(passport.session());
 
-// retrieve the whole object using the id saved in the session
-passport.deserializeUser(async function (id, done) {
-  let user;
-  try {
-    user = await UserController.findById(id);
+  /* The user id (you provide as the second argument of the done function) is saved in the session and is later used to retrieve the whole object via the deserializeUser function. */
+  passport.serializeUser(function (user, done) {
+    done(null, user.id);
+  });
 
-    // user object attaches to the request as req.user
-    done(null, user);
-  } catch (error) {
-    done(error, user);
-  }
-});
+  // retrieve the whole object using the id saved in the session
+  passport.deserializeUser(async function (id, done) {
+    let user;
+    try {
+      user = await UserController.findById(id);
 
-// FACEBOOK Strategy
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: process.env.FACEBOOK_APP_ID,
-      clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL:
-        `${process.env.APP_URL}/auth/facebook/callback` ||
-        "http://localhost:5000/auth/facebook/callback",
-      profileFields: ["id", "displayName", "email"],
+      // user object attaches to the request as req.user
+      done(null, user);
+    } catch (error) {
+      done(error, user);
+    }
+  });
+
+  // FACEBOOK Strategy
+  passport.use(facebook());
+
+  app.get("/auth/facebook", passport.authenticate("facebook"));
+
+  app.get(
+    "/auth/facebook/callback",
+    passport.authenticate("facebook", { failureRedirect: "/login" }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect("/");
     },
-    async function (accessToken, refreshToken, profile, cb) {
-      // console.log("***PROFILE***\n", profile);
-      try {
-        // find or create user in the Database
-        const user = await UserController.findOrCreate({
-          facebookId: profile.id,
-          displayName: profile.displayName,
-          email: profile.emails[0].value,
-        });
-
-        cb(null, user);
-      } catch (error) {
-        throw new Error("There was an arror with the Facebook login");
-      }
-    },
-  ),
-);
-
-module.exports = passport;
+  );
+};
