@@ -44,6 +44,30 @@ const findOrCreate = async (obj) => {
   return user;
 };
 
+const getLikes = async (id) => {
+  try {
+    const user = await User.findById(id);
+    return user.likes || [];
+  } catch (error) {
+    throw new Error("Invalid user");
+  }
+};
+
+const toggleLike = async (animalId, userId) => {
+  try {
+    const user = await User.findById(userId);
+    if (!user) throw new Error();
+
+    const index = user.likes.indexOf(animalId);
+    index === -1 ? user.likes.push(animalId) : user.likes.splice(index, 1);
+
+    user.save();
+    return index === -1; // return true if liked and false if disliked
+  } catch (error) {
+    throw new Error("Invalid user ID");
+  }
+};
+
 const remove = async (filter) => {};
 
 module.exports = {
@@ -51,4 +75,6 @@ module.exports = {
   find,
   findOrCreate,
   remove,
+  getLikes,
+  toggleLike,
 };

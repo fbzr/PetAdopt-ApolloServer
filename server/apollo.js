@@ -1,20 +1,19 @@
-const { ApolloServer } = require("apollo-server-express");
+const { ApolloServer, AuthenticationError } = require("apollo-server-express");
 const typeDefs = require("../graphql/schema");
 const resolvers = require("../graphql/resolvers");
 
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
+  // add next line to be able to access req properties in context function
   playground: { settings: { "request.credentials": "include" } },
-  context: ({ req, res }) => {
-    let user;
-
+  context: ({ req }) => {
     if (req.isAuthenticated()) {
-      user = req.user;
+      const user = req.user;
+      return { user };
+    } else {
+      throw new AuthenticationError("Authentication required");
     }
-
-    // add the user to the context
-    return { user };
   },
 });
 

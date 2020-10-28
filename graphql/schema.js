@@ -14,7 +14,6 @@ const typeDefs = gql`
 
   # mutations
   type Mutation {
-    createUser(username: String!, email: String!, password: String!): User!
     toggleLike(animalId: String!, userId: ID!): Boolean! # true if liked, false if disliked
   }
 `;

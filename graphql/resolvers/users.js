@@ -1,16 +1,15 @@
+const userController = require("../../data/controllers/User");
+
 module.exports = {
   Query: {
     getLikedAnimals: async (_, { userId }, context) => {
-      console.log("context user\n", context.user);
-      return [];
+      const likes = await userController.getLikes(userId);
+      return likes;
     },
   },
   Mutation: {
-    createUser: async (_, { username, email, password }) => {
-      return null;
-    },
     toggleLike: async (_, { animalId, userId }, context) => {
-      return false;
+      return await userController.toggleLike(animalId, userId);
     },
   },
 };
