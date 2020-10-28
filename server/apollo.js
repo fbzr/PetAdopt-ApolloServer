@@ -5,17 +5,13 @@ const resolvers = require("../graphql/resolvers");
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => {
-    // get the user token from the headers
-    const token = req.headers.authorization || "";
+  playground: { settings: { "request.credentials": "include" } },
+  context: ({ req, res }) => {
+    let user;
 
-    // try to retrieve a user with the token
-    // for test
-    const user = {
-      username: "fabricio",
-    };
-
-    // const user = getUser(token);
+    if (req.isAuthenticated()) {
+      user = req.user;
+    }
 
     // add the user to the context
     return { user };
