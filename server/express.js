@@ -3,7 +3,6 @@ const passport = require("../auth/passport");
 const apolloServer = require("./apollo");
 const connectDB = require("../data/connectDB");
 const session = require("express-session");
-const bodyParser = require("body-parser");
 
 const app = express();
 
