@@ -9,12 +9,13 @@ const typeDefs = gql`
 
   # queries
   type Query {
-    getLikedAnimals(userId: ID!): [String]! # array of animal ids
+    getUser(): User!
+    getLikedAnimals(): [String]! # array of animal ids
   }
 
   # mutations
   type Mutation {
-    toggleLike(animalId: String!, userId: ID!): Boolean! # true if liked, false if disliked
+    toggleLike(animalId: String!): Boolean! # true if liked, false if disliked
   }
 `;
 
