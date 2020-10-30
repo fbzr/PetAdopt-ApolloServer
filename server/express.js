@@ -3,6 +3,7 @@ const passport = require("../auth/passport");
 const apolloServer = require("./apollo");
 const connectDB = require("../data/connectDB");
 const session = require("express-session");
+const cors = require(`cors`);
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(
 passport(app);
 
 app.use(express.json());
+app.use(cors());
 
 apolloServer.applyMiddleware({ app });
 
