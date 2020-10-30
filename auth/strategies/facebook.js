@@ -9,6 +9,7 @@ module.exports = () => {
       callbackURL:
         `${process.env.APP_URL}/auth/facebook/callback` ||
         "http://localhost:5000/auth/facebook/callback",
+      profileFields: ["id", "displayName", "email"],
     },
     async function (accessToken, refreshToken, profile, cb) {
       // console.log("***PROFILE***\n", profile);
