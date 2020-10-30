@@ -2,8 +2,8 @@ const userController = require("../../data/controllers/User");
 
 module.exports = {
   Query: {
-    getUser: (_, { id }, context) => context.user,
-    getLikedAnimals: async (_, __, context) => {
+    user: (_, { id }, context) => context.user,
+    likedAnimals: async (_, __, context) => {
       const likes = await userController.getLikes(context.user.id);
       return likes;
     },

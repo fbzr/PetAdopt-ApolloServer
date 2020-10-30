@@ -9,8 +9,8 @@ const typeDefs = gql`
 
   # queries
   type Query {
-    getUser: User!
-    getLikedAnimals: [String]! # array of animal ids
+    user: User!
+    likedAnimals: [String]! # array of animal ids
   }
 
   # mutations
