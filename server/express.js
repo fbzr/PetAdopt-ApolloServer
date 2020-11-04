@@ -20,9 +20,9 @@ app.use(
   }),
 );
 
-passport(app);
-
 app.use(express.json());
+
+passport(app);
 
 apolloServer.applyMiddleware({ app });
 
