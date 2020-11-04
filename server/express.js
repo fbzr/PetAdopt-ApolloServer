@@ -10,6 +10,8 @@ const app = express();
 // connect DB
 connectDB();
 
+app.use(cors());
+
 app.use(
   session({
     secret: process.env.LOCAL_SECRET,
@@ -21,7 +23,6 @@ app.use(
 passport(app);
 
 app.use(express.json());
-app.use(cors());
 
 apolloServer.applyMiddleware({ app });
 
