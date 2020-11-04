@@ -33,15 +33,15 @@ module.exports = (app) => {
 
   app.get(
     "/auth/facebook/callback",
-    passport.authenticate("facebook", { failureRedirect: "/login" }),
+    passport.authenticate("facebook", { failureRedirect: `${process.env.CLIENT_URL}/login` }),
     function (req, res) {
       // Successful authentication, redirect home.
-      res.redirect("/");
+      res.redirect(process.env.CLIENT_URL);
     },
   );
 
   app.get("/logout", (req, res) => {
     req.logout();
-    res.redirect("/");
+    res.redirect(process.env.CLIENT_URL);
   });
 };
