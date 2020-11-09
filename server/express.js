@@ -4,6 +4,7 @@ const apolloServer = require("./apollo");
 const connectDB = require("../data/connectDB");
 const session = require("express-session");
 const cors = require(`cors`);
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -11,6 +12,7 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:4200",
@@ -19,12 +21,14 @@ app.use(
 );
 
 app.use(
-  session({
+  express.session({
     secret: process.env.LOCAL_SECRET,
     resave: false,
     saveUninitialized: false,
   })
 );
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 passport(app);
 
