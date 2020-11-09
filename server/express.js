@@ -12,6 +12,7 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
@@ -27,8 +28,6 @@ app.use(
     saveUninitialized: false,
   })
 );
-
-app.use(bodyParser.urlencoded({ extended: false }));
 
 passport(app);
 
