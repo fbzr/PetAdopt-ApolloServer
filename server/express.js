@@ -32,7 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 passport(app);
 
-apolloServer.applyMiddleware({ app, cors: false });
+apolloServer.applyMiddleware({ app });
 
 app.get("/", (req, res) => {
   console.log("***REQ SESSION***\n", req.session);
