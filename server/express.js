@@ -3,6 +3,7 @@ const passport = require("../auth/passport");
 const apolloServer = require("./apollo");
 const connectDB = require("../data/connectDB");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 const cors = require(`cors`);
 
 const app = express();
@@ -26,6 +27,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 passport(app);
 

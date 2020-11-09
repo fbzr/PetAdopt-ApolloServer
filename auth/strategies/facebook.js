@@ -7,6 +7,7 @@ module.exports = () => {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL:
+        "https://petadopt.netlify.app/" ||
         `${process.env.APP_URL}/auth/facebook/callback` ||
         "http://localhost:5000/auth/facebook/callback",
       profileFields: ["id", "displayName", "email"],
@@ -25,6 +26,6 @@ module.exports = () => {
       } catch (error) {
         throw new Error("There was an arror with the Facebook login");
       }
-    },
+    }
   );
 };
