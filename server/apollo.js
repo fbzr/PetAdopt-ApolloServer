@@ -13,15 +13,12 @@ const apolloServer = new ApolloServer({
       throw new AuthenticationError("Authentication required");
     }
   },
-  playground:
-    process.env.NODE_ENV === "production"
-      ? false
-      : {
-          // to be able to access req properties in context function
-          settings: {
-            "request.credentials": "include",
-          },
-        },
+  playground: {
+    // to be able to access req properties in context function
+    settings: {
+      "request.credentials": "include",
+    },
+  },
 });
 
 module.exports = apolloServer;

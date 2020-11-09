@@ -12,6 +12,7 @@ const app = express();
 connectDB();
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
