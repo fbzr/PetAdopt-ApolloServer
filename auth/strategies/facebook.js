@@ -7,7 +7,6 @@ module.exports = () => {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL:
-        "https://petadopt.netlify.app/" ||
         `${process.env.APP_URL}/auth/facebook/callback` ||
         "http://localhost:5000/auth/facebook/callback",
       profileFields: ["id", "displayName", "email"],
