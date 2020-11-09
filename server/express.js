@@ -4,15 +4,11 @@ const apolloServer = require("./apollo");
 const connectDB = require("../data/connectDB");
 const session = require("express-session");
 const cors = require(`cors`);
-const bodyParser = require("body-parser");
 
 const app = express();
 
 // connect DB
 connectDB();
-
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(
   cors({
@@ -21,8 +17,10 @@ app.use(
   })
 );
 
+app.use(express.json());
+
 app.use(
-  express.session({
+  session({
     secret: process.env.LOCAL_SECRET,
     resave: false,
     saveUninitialized: false,
