@@ -14,7 +14,7 @@ connectDB();
 app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:4200",
-    credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
 
@@ -37,6 +37,8 @@ apolloServer.applyMiddleware({
   cors: {
     origin: process.env.CLIENT_URL || "http://localhost:4200",
     credentials: true,
+    optionsSuccessStatus: 200,
+    methods: "POST",
   },
 });
 
