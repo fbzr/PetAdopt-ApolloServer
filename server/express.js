@@ -34,7 +34,6 @@ apolloServer.applyMiddleware({
     credentials: true,
     allowedHeaders: ["Content-Type", "application/x-www-form-urlencoded"],
     optionsSuccessStatus: 200,
-    methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
   },
 });
 
