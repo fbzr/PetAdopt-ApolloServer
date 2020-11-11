@@ -38,10 +38,9 @@ apolloServer.applyMiddleware({
   cors: {
     origin: ["process.env.CLIENT_URL", "http://localhost:4200"],
     credentials: true,
-    // allowedHeaders: ["Content-Type", "application/x-www-form-urlencoded"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "application/x-www-form-urlencoded"],
     optionsSuccessStatus: 200,
-    methods: "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+    methods: "GET,POST,PUT,PATCH,DELETE,OPTIONS",
   },
 });
 
