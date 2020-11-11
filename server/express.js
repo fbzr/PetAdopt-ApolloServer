@@ -39,7 +39,7 @@ apolloServer.applyMiddleware({
     origin: ["process.env.CLIENT_URL", "http://localhost:4200"],
     credentials: true,
     // allowedHeaders: ["Content-Type", "application/x-www-form-urlencoded"],
-    allowedHeaders: ["Content-Type", "application/json"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     optionsSuccessStatus: 200,
     methods: "GET,PUT,POST,PATCH,DELETE,OPTIONS",
   },
