@@ -36,7 +36,7 @@ passport(app);
 apolloServer.applyMiddleware({
   app,
   cors: {
-    origin: process.env.CLIENT_URL || "http://localhost:4200",
+    origin: ["process.env.CLIENT_URL", "http://localhost:4200"],
     credentials: true,
     // allowedHeaders: ["Content-Type", "application/x-www-form-urlencoded"],
     allowedHeaders: ["Content-Type", "application/json"],
