@@ -33,11 +33,17 @@ module.exports = (app) => {
 
   app.get(
     "/auth/facebook/callback",
-    passport.authenticate("facebook", { 
-      successRedirect: `${process.env.CLIENT_URL}`,
-      failureRedirect: `${process.env.CLIENT_URL}/login` 
+    passport.authenticate("facebook", {
+      successRedirect: `/success`,
+      failureRedirect: `${process.env.CLIENT_URL}/login`,
     })
   );
+
+  app.get("/success", (req, res) => {
+    // add headers here
+    res.header("Access-Control-Allow-Origin", "*");
+    res.redirect(`${process.env.CLIENT_URL}`);
+  });
 
   app.get("/logout", (req, res) => {
     req.logout();
