@@ -41,7 +41,7 @@ module.exports = (app) => {
 
   app.get("/success", (req, res) => {
     // add headers here
-    res.header("Access-Control-Allow-Origin", `${process.env.CLIENT_URL}`);
+    res.header("Access-Control-Allow-Origin", "*");
     res.redirect(`${process.env.CLIENT_URL}`);
   });
 

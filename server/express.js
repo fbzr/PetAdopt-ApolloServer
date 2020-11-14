@@ -13,7 +13,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: ["process.env.CLIENT_URL", "http://localhost:4200"],
+    origin: [`${process.env.CLIENT_URL}`, "http://localhost:4200"],
     optionsSuccessStatus: 200,
     credentials: true,
   })
@@ -24,12 +24,12 @@ app.use(express.json());
 app.use(
   session({
     secret: process.env.LOCAL_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 passport(app);
 
