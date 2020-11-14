@@ -24,8 +24,8 @@ app.use(express.json());
 app.use(
   session({
     secret: process.env.LOCAL_SECRET,
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
   })
 );
 
